@@ -1,0 +1,61 @@
+---
+title: "Class_10_22_18"
+author: "Max Weiss"
+date: "10/22/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(dplyr)
+library(stringi)
+library(stringr)
+
+unzip("indiv90.zip")
+
+fec_header = read_csv("indiv_header_file.csv")
+
+fec = read_delim("itcont.txt", delim = "|", col_names = FALSE)
+
+fec_harv <- fec %>%
+  filter(str_detect(X12, pattern = "HARVARD")) %>%
+  sample_n(10)
+
+fec_harv <- fec %>%
+  filter(str_detect(X12, pattern = "HARVARD")) %>%
+  count(X12)
+
+```
+
+
+
+
+ 
+```{r}
+
+head(fec)
+
+glimpse(fec)
+
+
+
+
+fec
+
+fec %>%
+  transmute(name = X8, employer = X12, state = X10, amount = X15) %>%
+  sample_n(10)
+
+head(fec)
+
+str_subset("HARVARD")
+
+
+  filter(X12 == "HARVARD")
+
+fec_harv
+
+```
+
